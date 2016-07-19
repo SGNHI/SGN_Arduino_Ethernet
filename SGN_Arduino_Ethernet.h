@@ -50,7 +50,7 @@ private:
 	int chk = 42;
 	char* senCode;
 	uint32_t value;
-	
+friend class sgnDev;
 };
 
 
@@ -74,7 +74,7 @@ private:
 	unsigned long restTime = REST;
 	IPAddress addr;
 	void init();
-	
+
 
 };
 
