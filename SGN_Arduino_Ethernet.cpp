@@ -125,13 +125,13 @@ int sgnDev::send(dotori mdotori, ...){//iot_up 소스코드 수정해야함 -> �
 		*/
 		Serial.println(client.status());
 		client.stop();
-  		DEBUG_PRINT("connection failed");
-  		DEBUG_PRINT("try to begin");
-  		init();// 빠른 init
-  		state = 0;
-  		return ERROR;
-  	}
-  	return OK;
+		DEBUG_PRINT("connection failed");
+		DEBUG_PRINT("try to begin");
+		init();// 빠른 init
+		state = 0;
+		return ERROR;
+	}
+	return OK;
 }
 
 sgnDev dev;
