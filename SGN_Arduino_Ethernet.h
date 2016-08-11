@@ -9,7 +9,7 @@
     #include "Arduino.h"
 #endif
 
-#define SERVER "veyrobotics.cafe24.com"
+#define SERVER "sgnhi.org"
 
 #define atInt 1
 #define atFloat 2

@@ -105,11 +105,28 @@ int sgnDev::send(dotori mdotori, ...){//iot_up 소스코드 수정해야함 -> �
 		va_end(vl);
 
 		client.print(" HTTP/1.0\r\n");
-		client.print("Host:veyrobotics.cafe24.com \r\n");
+		client.print("Host:sgnhi.org \r\n");
 		client.print("User-Agent: sgnhi\r\n");
 		client.print("Connection: close\r\n");
 		client.println();
-		state = client.status() == 0?0:1;
+
+		String req = "";
+		unsigned long lastRead = millis();
+		state = 0;
+		while(!client.available() && (millis() - lastRead < 1000));
+		while(client.available()){
+			req += (char) client.read();
+			if(req.endsWith("SGNHI0")){
+				state = 1;
+				DEBUG_PRINT("SGNHI0");
+			}
+			if(req.endsWith("SGNHI1")){
+				state = 0;
+				DEBUG_PRINT("SGNHI1");
+			}
+			lastRead = millis();
+			//Serial.print((char)client.read());
+		}
 		client.stop();
 		sTime = now;
 
