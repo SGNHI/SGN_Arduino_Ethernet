@@ -67,6 +67,41 @@ void sgnDev::setmac(byte a,byte b,byte c,byte d,byte e,byte f){
 	mac[5] = f;
 }
 
+int sgnDev::mail(char *subject,char *text){
+	if (client.connect(SERVER, 80)) {//서버에 연결됨을 확인.
+		DEBUG_PRINT("connected");
+		//서버에 데이터 전송
+		client.print("GET /iot/iot_up.php?");
+		client.print("uid=");client.print(ID);
+		client.print("&dc=");client.print(devCode);
+		client.print("$ms=");client.print(subject);
+		client.print("$mt=");client.print(text);
+		client.print(" HTTP/1.0\r\n");
+		client.print("Host:sgnhi.org \r\n");
+		client.print("User-Agent: sgnhi\r\n");
+		client.print("Connection: close\r\n");
+		client.println();
+		client.stop();
+	}
+	else {//서버와의 열결 실패를 확인.
+		/*
+		연결실패의 원인은 다양하다.
+		정말 서버가 없거나,
+		공유기에서 IP 할당을 끝낼때,
+		(대기시간이 긴경우 자동으로 IP할당이 끊기고 이로인해 서버에 접속을 못함)
+		간단한 해결법은 그냥 다시한번 공유기에 IP할당을 요청하는 것이다.
+		처음에 사용한 init 함수를 통해서..
+		*/
+		Serial.println(client.status());
+		client.stop();
+		DEBUG_PRINT("connection failed");
+		DEBUG_PRINT("try to begin");
+		init();// 빠른 init
+		state = 0;
+		return ERROR;
+	}
+	return OK;
+}
 
 int sgnDev::send(dotori mdotori, ...){//iot_up 소스코드 수정해야함 -> 수정완료.
 
