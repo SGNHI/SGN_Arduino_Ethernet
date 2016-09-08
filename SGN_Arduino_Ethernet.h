@@ -61,6 +61,7 @@ class sgnDev {
 public:
 	void init(char *id,char *devCode,IPAddress local_ip);
 	int send(dotori mdotori,...);
+	int mail(char *subject,char *text);
 	void setRest(unsigned long rest);
 	void setmac(byte a,byte b,byte c,byte d,byte e,byte f);
 private:
