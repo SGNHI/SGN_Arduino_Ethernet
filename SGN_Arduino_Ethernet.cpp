@@ -146,7 +146,7 @@ int sgnDev::send(dotori mdotori, ...){//iot_up 소스코드 수정해야함 -> �
 
 		String req = "";
 		unsigned long lastRead = millis();
-		state = 0;
+		state = 1;
 		while(!client.available() && (millis() - lastRead < 2000));
 		while(client.available()){
 			req += (char) client.read();
@@ -158,7 +158,6 @@ int sgnDev::send(dotori mdotori, ...){//iot_up 소스코드 수정해야함 -> �
 				state = 0;
 				DEBUG_PRINT("SGNHI1");
 			}
-			lastRead = millis();
 			//Serial.print((char)client.read());
 		}
 		client.stop();
