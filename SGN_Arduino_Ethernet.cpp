@@ -97,7 +97,6 @@ int sgnDev::mail(char *subject,char *text){
 		DEBUG_PRINT("connection failed");
 		DEBUG_PRINT("try to begin");
 		init();// 빠른 init
-		state = 0;
 		return ERROR;
 	}
 	return OK;
@@ -148,15 +147,15 @@ int sgnDev::send(dotori mdotori, ...){//iot_up 소스코드 수정해야함 -> �
 		String req = "";
 		unsigned long lastRead = millis();
 		state = 0;
-		while(!client.available() && (millis() - lastRead < 1000));
+		while(!client.available() && (millis() - lastRead < 2000));
 		while(client.available()){
 			req += (char) client.read();
 			if(req.endsWith("SGNHI0")){
-				state = 0;
+				state = 1;
 				DEBUG_PRINT("SGNHI0");
 			}
 			if(req.endsWith("SGNHI1")){
-				state = 1;
+				state = 0;
 				DEBUG_PRINT("SGNHI1");
 			}
 			lastRead = millis();
