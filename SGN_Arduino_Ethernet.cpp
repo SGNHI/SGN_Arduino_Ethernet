@@ -152,11 +152,11 @@ int sgnDev::send(dotori mdotori, ...){//iot_up 소스코드 수정해야함 -> �
 		while(client.available()){
 			req += (char) client.read();
 			if(req.endsWith("SGNHI0")){
-				state = 1;
+				state = 0;
 				DEBUG_PRINT("SGNHI0");
 			}
 			if(req.endsWith("SGNHI1")){
-				state = 0;
+				state = 1;
 				DEBUG_PRINT("SGNHI1");
 			}
 			lastRead = millis();
