@@ -74,8 +74,8 @@ int sgnDev::mail(char *subject,char *text){
 		client.print("GET /iot/iot_up.php?");
 		client.print("uid=");client.print(ID);
 		client.print("&dc=");client.print(devCode);
-		client.print("$ms=");client.print(subject);
-		client.print("$mt=");client.print(text);
+		client.print("&ms=");client.print(subject);
+		client.print("&mt=");client.print(text);
 		client.print(" HTTP/1.0\r\n");
 		client.print("Host:sgnhi.org \r\n");
 		client.print("User-Agent: sgnhi\r\n");
